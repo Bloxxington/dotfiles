@@ -76,5 +76,8 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+10 move container to workspace $ws10
+default_border none
+default_floating_border none
+
 # Hide Window Titles
 hide_edge_borders both
