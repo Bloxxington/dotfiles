@@ -1,0 +1,141 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+background     = #000000 
+background-alt = #111111  
+foreground     = #FFFFFF  
+primary        = #FFFFFF  
+secondary      = #AAAAAA  
+alert          = #FF0000  
+disabled       = #555555 
+
+[bar/example]
+width = 100%
+radius = 6
+font-0 = JetBrains Mono:size=11;1
+font-1 = Symbols Nerd Font Mono:style=Regular:size=15;1
+height = 25pt
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3pt
+
+module-margin = 1
+
+separator = |
+separator-foreground = ${colors.disabled}
+
+
+modules-left = arch xworkspaces 
+modules-center = xwindow
+modules-right =  pulseaudio wlan date
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
+
+; wm-restack = generic
+; wm-restack = bspwm
+; wm-restack = i3
+
+; override-redirect = true
+
+; This module is not active by default (to enable it, add it to one of the
+; modules-* list above).
+; Please note that only a single tray can exist at any time. If you launch
+; multiple bars with this module, only a single one will show it, the others
+; will produce a warning. Which bar gets the module is timing dependent and can
+; be quite random.
+; For more information, see the documentation page for this module:
+; https://polybar.readthedocs.io/en/stable/user/modules/tray.html
+[module/systray]
+type = internal/tray
+
+format-margin = 8pt
+tray-spacing = 16pt
+
+[module/arch]
+type = custom/text
+format = %{T1}%{F#FFFFFF}󰣇%{F-}%{T-}
+
+[module/xworkspaces]
+type = internal/xworkspaces
+
+label-active = %name%
+label-active-background = ${colors.background-alt}
+label-active-underline= ${colors.primary}
+label-active-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.disabled}
+label-empty-padding = 1
+
+[module/xwindow]
+type = internal/xwindow
+label = %title%
+label-maxlen = 30
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = %{T1}%{T-} <label-volume>
+format-volume-prefix-foreground = ${colors.primary}
+
+label-volume = %percentage%%
+
+label-muted = %{T1}%{T-} Muted
+label-muted-foreground = ${colors.disabled}
+
+[network-base]
+type = internal/network
+interval = 5
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+label-disconnected = %{F#F0C674}%ifname%%{F#707880} disconnected
+
+[module/wlan]
+type = custom/script
+exec = ~/.config/polybar/scripts/wifi-status.sh
+interval = 5
+tail = false
+click-left = ~/.config/polybar/scripts/rofi-wifi.sh
+
+[module/date]
+type = internal/date
+interval = 1
+timezone = Asia/Karachi
+date = %I:%M %p
+label = %date%
+label-foreground = ${colors.primary}
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = false
+
+; vim:ft=dosini
