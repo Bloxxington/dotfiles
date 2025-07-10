@@ -1,1 +1,1 @@
-# My i3 Rice Configs
+# i3 Rice
