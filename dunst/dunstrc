@@ -1,0 +1,14 @@
+[global]
+font = FiraCode Nerd Font 10
+background = "#000000"
+foreground = "#FFFFFF"
+frame_color = "#FFFFFF"
+highlight = "#FFFFFF"
+progress_bar = true
+progress_bar_height = 3
+horizontal_padding = 16
+separator_height = 0
+markup = full
+
+[urgency_low]
+timeout = 1000
